@@ -1,18 +1,27 @@
-var init = function() {
-    var board_width = function() {
-        var height = $(window).height();
+$(document).ready(function() {
+    ///////////////////////////////////////
+    // Resize board based on window size //
+    ///////////////////////////////////////
 
-        var pc = parseInt(80 * height / 100) + 'px';
-        $("#board").css('width', pc);
-        $("#footer").css('width', pc);
+    var height = $(window).height();
 
-        var font = parseInt(3.8 * height / 100) + 'px';
-        $("body").css('font-size', font);
-    };
+    var pc = parseInt(80 * height / 100) + 'px';
+    $("#board").css('width', pc);
+    $("#footer").css('width', pc);
 
-    board_width();
+    var font = parseInt(3.8 * height / 100) + 'px';
+    $("body").css('font-size', font);
+
+    ///////////////////////////
+    // Initialize game state //
+    ///////////////////////////
 
     var game = new Chess();
+
+    ////////////////////////////
+    // Initialize game engine //
+    ////////////////////////////
+
     var stockfish = new Worker("js/stockfish.js");
     stockfish.onmessage = function(event) {
         if (event.data.substring(0,8) == 'bestmove') {
@@ -33,6 +42,10 @@ var init = function() {
 
     stockfish.postMessage('uci');
     stockfish.postMessage('ucinewgame');
+
+    ///////////////////////////////////////////////
+    // Set behavior for chess board presentation //
+    ///////////////////////////////////////////////
 
     var onDragStart = function(source, piece, position, orientation) {
         // Disallow dragging computer's pieces and when game is over and it's not your turn
@@ -79,6 +92,10 @@ var init = function() {
         board.position(game.fen());
     };
 
+    ////////////////////////
+    // Create chess board //
+    ////////////////////////
+
     var board = ChessBoard('board', {
         pieceTheme: 'img/chesspieces/wikipedia/{piece}.png',
         showNotation: false,
@@ -90,15 +107,13 @@ var init = function() {
         onSnapEnd: onSnapEnd
     });
 
+    ////////////////
+    // Start game //
+    ////////////////
+
     // Randomly open e4 or d4.
     var open = (Math.floor(Math.random() * 2) == 0) ? 'e' : 'd';
-
-    game.move({
-        from: open + '2',
-        to: open + '4'
-    });
+    game.move(open + '4');
 
     board.position(game.fen());
-};
-
-$(document).ready(init);
+});
