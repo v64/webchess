@@ -2,7 +2,7 @@
 #### Chess game with embedded engine
 
 Author: Jahn Veach &lt;j@hnvea.ch&gt;  
-License: MIT License
+License: MIT License  
 Demo: http://jahnvea.ch/
 
 ### Acknowledgements
