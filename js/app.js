@@ -2,12 +2,12 @@ var init = function() {
     var board_width = function() {
         var height = $(window).height();
         var pc = (80 * height) / 100;
-        var font = (0.5 * height) / 10;
+        var font = (0.38 * height) / 10;
         pc = parseInt(pc) + 'px';
         font = parseInt(font) + 'px';
         $("#board").css('width', pc);
         $("body").css('font-size', font);
-        console.log(pc);
+        //console.log(pc);
     };
 
     board_width();
