@@ -1,4 +1,18 @@
 var init = function() {
+    var board_width = function() {
+        var height = $(window).height();
+        var pc = (80 * height) / 100;
+        var font = (0.5 * height) / 10;
+        pc = parseInt(pc) + 'px';
+        font = parseInt(font) + 'px';
+        $("#board").css('width', pc);
+        $("body").css('font-size', font);
+        console.log(pc);
+    };
+
+    board_width();
+    //$(window).bind('resize', board_width);
+
     var game = new Chess();
     var stockfish = new Worker("js/stockfish.js");
     stockfish.onmessage = function(event) {

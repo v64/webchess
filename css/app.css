@@ -1,7 +1,6 @@
 body {
 	background: #222222;
 	font-family: 'Helvetica';
-	font-size: 2em;
 	color: #ffffff;
 }
 
@@ -9,13 +8,13 @@ a {
 	color: #ffffff;
 }
 
-.main {
-	width: 500px;
+.footer {
+	width: 100%;
 	margin: 0px auto;
 }
 
 .board {
-	width: 500px;
+	margin: 0px auto;
 }
 
 p {
