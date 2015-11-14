@@ -1,0 +1,23 @@
+body {
+	background: #222222;
+	font-family: 'Helvetica';
+	font-size: 1.5em;
+	color: #ffffff;
+}
+
+a {
+	color: #ffffff;
+}
+
+.main {
+	width: 2em;
+	margin: 0px auto;
+}
+
+.board {
+	width: 350px;
+}
+
+p {
+	text-align: center;
+}
