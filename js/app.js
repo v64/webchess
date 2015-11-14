@@ -35,15 +35,28 @@ var init = function() {
     stockfish.postMessage('ucinewgame');
 
     var onDragStart = function(source, piece, position, orientation) {
-        // Disallow dragging computer's pieces and when game is over
-        if (game.game_over() || piece.search(/^b/) !== -1) {
+        // Disallow dragging computer's pieces and when game is over and it's not your turn
+        if (game.game_over() || piece.search(/^w/) !== -1 || game.turn() === 'w') {
             return false;
         }
     };
 
     var computerMove = function() {
+        // Think between 1-2 secs in the first six moves (twelve ply),
+        // then 2-4 secs after.
+        var minTime, maxTime;
+        if (game.history().length <= 12) {
+            minTime = 1000;
+            maxTime = 2000;
+        } else {
+            minTime = 2000;
+            maxTime = 4000;
+        }
+
+        var think = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+
         stockfish.postMessage('position fen ' + game.fen());
-        stockfish.postMessage('go movetime 1000');
+        stockfish.postMessage('go movetime ' + think);
     };
 
     var onDrop = function(source, target) {
@@ -57,7 +70,7 @@ var init = function() {
         // illegal move
         if (move === null) return 'snapback';
 
-        if (game.turn() === 'b' && !game.game_over()) {
+        if (game.turn() === 'w' && !game.game_over()) {
             computerMove();
         }
     };
@@ -69,12 +82,23 @@ var init = function() {
     var board = ChessBoard('board', {
         pieceTheme: 'img/chesspieces/wikipedia/{piece}.png',
         showNotation: false,
+        orientation: 'black',
         position: 'start',
         draggable: true,
         onDragStart: onDragStart,
         onDrop: onDrop,
         onSnapEnd: onSnapEnd
     });
+
+    // Randomly open e4 or d4.
+    var open = (Math.floor(Math.random() * 2) == 0) ? 'e' : 'd';
+
+    game.move({
+        from: open + '2',
+        to: open + '4'
+    });
+
+    board.position(game.fen());
 };
 
 $(document).ready(init);
