@@ -6,18 +6,15 @@ var init = function() {
         pc = parseInt(pc) + 'px';
         font = parseInt(font) + 'px';
         $("#board").css('width', pc);
+        $("#footer").css('width', pc);
         $("body").css('font-size', font);
-        //console.log(pc);
     };
 
     board_width();
-    //$(window).bind('resize', board_width);
 
     var game = new Chess();
     var stockfish = new Worker("js/stockfish.js");
     stockfish.onmessage = function(event) {
-        //console.log(event.data);
-
         if (event.data.substring(0,8) == 'bestmove') {
             var fromSq = event.data.substring(9,11);
             var toSq = event.data.substring(11,13);
@@ -29,8 +26,6 @@ var init = function() {
                 to: toSq,
                 promotion: promotion
             });
-
-            //console.log('Move:' + fromSq + ' ' + toSq);
 
             board.position(game.fen());
         }

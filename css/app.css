@@ -8,12 +8,11 @@ a {
 	color: #ffffff;
 }
 
-.footer {
-	width: 100%;
+#footer {
 	margin: 0px auto;
 }
 
-.board {
+#board {
 	margin: 0px auto;
 }
 
