@@ -9,7 +9,7 @@ $(document).ready(function() {
     $("#board").css('width', pc);
     $("#footer").css('width', pc);
 
-    var font = parseInt(3.8 * height / 100) + 'px';
+    var font = parseInt(4.5 * height / 100) + 'px';
     $("body").css('font-size', font);
 
     ///////////////////////////
