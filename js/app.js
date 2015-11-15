@@ -107,13 +107,15 @@ $(document).ready(function() {
         onSnapEnd: onSnapEnd
     });
 
-    ////////////////
-    // Start game //
-    ////////////////
+    //////////////////////////////////
+    // Start game after two seconds //
+    //////////////////////////////////
 
-    // Randomly open e4 or d4.
-    var open = (Math.floor(Math.random() * 2) == 0) ? 'e' : 'd';
-    game.move(open + '4');
+    setTimeout(function() {
+        // Randomly open e4 or d4.
+        var open = (Math.floor(Math.random() * 2) == 0) ? 'e' : 'd';
+        game.move(open + '4');
 
-    board.position(game.fen());
+        board.position(game.fen());
+    }, 2000);
 });
