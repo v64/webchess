@@ -97,7 +97,7 @@ $(document).ready(function() {
     ////////////////////////
 
     var board = ChessBoard('board', {
-        pieceTheme: 'img/chesspieces/wikipedia/{piece}.png',
+        pieceTheme: 'img/{piece}.png',
         showNotation: false,
         orientation: 'black',
         position: 'start',
