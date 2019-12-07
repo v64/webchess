@@ -3,7 +3,7 @@
 
 Author: Jahn Veach &lt;j@hnvea.ch&gt;  
 License: MIT License  
-Demo: http://jahnvea.ch/
+Demo: https://jahnvea.ch/
 
 ### Acknowledgements
 
